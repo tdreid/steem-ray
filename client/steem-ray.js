@@ -38,13 +38,16 @@ window.onload = function() {
     this.payees = ko.observableArray(defaultPayees);
     this.showJson = ko.observable(true);
     this.total = ko.computed(
-      () => this.payees().reduce((a,c) => a + +c.amount(), 0).toFixed(3,0),
+      () =>
+        this.payees()
+          .reduce((a, c) => a + +c.amount(), 0)
+          .toFixed(3, 0),
       this
     );
     this.pay = () => {
       console.log('Pay method not yet implemented.');
     };
-    this.wif = ko.observable('');  
+    this.wif = ko.observable('');
     this.payer = ko.observable('');
   };
 
