@@ -1,5 +1,6 @@
 require('bootstrap');
 const ko = require('knockout');
+const steem = require('steem');
 
 window.onload = function() {
   let Payee = function(addr = '', amt = '') {
