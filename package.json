@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "npx babel --presets=env client/steem-ray.js -o client/steem-ray-babel-out.js && browserify client/steem-ray-babel-out.js | uglifyjs -cm > public/js/steem-ray.min.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "bootstrap": "^4.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "jquery": "^3.3.1",
+    "knockout": "^3.4.2",
     "morgan": "~1.9.0",
+    "popper.js": "^1.14.3",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5"
   },
@@ -25,5 +30,11 @@
     "url": "https://github.com/tdreid/steem-ray/issues"
   },
   "homepage": "https://github.com/tdreid/steem-ray#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "browserify": "^16.2.2",
+    "uglify-js": "^3.3.25"
+  }
 }
