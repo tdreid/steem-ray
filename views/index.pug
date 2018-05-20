@@ -39,8 +39,15 @@ html(lang="en")
               button(type="button" class="close" data-dismiss="modal")
                 span &times;
             div(class="modal-body")
-              label(for="wif") Posting WIF
+              label(for="payer") Your STEEM account name
+              input(class="form-control" id="payer" data-bind="value: payer" type="text")            
+              label(for="wif") Active WIF
               input(class="form-control" id="wif" data-bind="value: wif" type="password" size="40")
             div(class="modal-footer")
+              span.text-left.text-info 
+              | This client does not store nor send your credential anywhere 
+              | except to use it to broadcast your transaction(s). Always be 
+              | mindful of where you are sharing your keys. Use the least 
+              | privileged key for your intended purpose.
               button(type="button" class="btn btn-primary" data-dismiss="modal") Continue    
     script(src="js/steem-ray.min.js")

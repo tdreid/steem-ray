@@ -42,9 +42,10 @@ window.onload = function() {
       this
     );
     this.pay = () => {
-      console.log('what');
+      console.log('Pay method not yet implemented.');
     };
-    this.wif = ko.observable('');    
+    this.wif = ko.observable('');  
+    this.payer = ko.observable('');
   };
 
   let defaults = [
