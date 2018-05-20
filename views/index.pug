@@ -4,16 +4,43 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous")
-    title Bootstrap 4 Starter
+    title= title
   body
-    main.container
+    main.container(style="padding-top: 12px;")
       div.row
-        div.col-3
         div.col-6
-        div.col-3
-    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js" integrity="sha256-owX7sroiO/O1a7h3a4X29A1g3QgqdNvijRQ7V5TH45M=" crossorigin="anonymous")
-    script(src="js/steem-ray.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" integrity="sha256-FiZMk1zgTeujzf/+vomWZGZ9r00+xnGvOgXoj0Jo1jA=" crossorigin="anonymous")
+          h2 Memo
+          input.form-control(type="text"  data-bind="value: memo")
+      div.row
+        div.col-4
+          h2(style="padding-top: 6px;") Payees
+        div.col-2
+          h2.text-right(style="padding-top: 6px;" data-bind="text: total")
+      div.row
+        div.col-6
+          ul.list-group(data-bind="foreach: payees" style="margin-top: 12px;")
+            li.list-group-item
+              div.row
+                div.col-6.text-left(data-bind="text: address")
+                div.col-6.text-right
+                  input.form-control.text-right(data-bind="{value: amount, enable: true}")
+          div.row
+              button.btn.btn-primary(style="margin-top: 12px;"  data-toggle="modal" data-target="#payModal") Pay
+        if dev
+          div.col-6
+            div(data-bind="visible: $root.showJson")
+              pre(data-bind="text: ko.toJSON($root, null, 2)")
+    div(id="bullpen")
+      div(class="modal fade" id="payModal" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role="document")
+          div(class="modal-content")
+            div(class="modal-header")
+              h5(class="modal-title" id="settingsModalLabel") Credential
+              button(type="button" class="close" data-dismiss="modal")
+                span &times;
+            div(class="modal-body")
+              label(for="wif") Posting WIF
+              input(class="form-control" id="wif" data-bind="value: wif" type="password" size="40")
+            div(class="modal-footer")
+              button(type="button" class="btn btn-primary" data-dismiss="modal") Continue    
+    script(src="js/steem-ray.min.js")
