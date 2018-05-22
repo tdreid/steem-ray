@@ -1,11 +1,12 @@
 require('bootstrap');
 const ko = require('knockout');
 const steem = require('steem');
-steem.api.setOptions({
+const options = {
   url: 'wss://testnet.steem.vc',
   address_prefix: 'STX',
   chain_id: '79276aea5d4877d9a25892eaa01b0adf019d3e5cb12a97478df3298ccdd01673'
-});
+}
+
 
 window.onload = function() {
   let Payee = function(addr = '', amt = '') {
@@ -51,6 +52,7 @@ window.onload = function() {
       this
     );
     this.pay = () => {
+      steem.api.setOptions(options);
       let promises = self.payees().map(payee => {
         let promise = new Promise((resolve, reject) => {
           steem.broadcast.transfer(
