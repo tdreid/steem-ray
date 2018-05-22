@@ -59,7 +59,7 @@ window.onload = function() {
             self.wif(),
             self.payer(),
             payee.address(),
-            payee.amount(),
+            payee.amount() + ' SBD',
             self.memo(),
             (err, result) => {
               if (err) {
@@ -74,6 +74,7 @@ window.onload = function() {
         });
         return promise;
       });
+      Promise.all(promises).then(console.log('All transactions resolved. See wallet.'));
     };
     this.wif = ko.observable('');
     this.payer = ko.observable('');
