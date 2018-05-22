@@ -1,6 +1,11 @@
 require('bootstrap');
 const ko = require('knockout');
 const steem = require('steem');
+steem.api.setOptions({
+  url: 'wss://testnet.steem.vc',
+  address_prefix: 'STX',
+  chain_id: '79276aea5d4877d9a25892eaa01b0adf019d3e5cb12a97478df3298ccdd01673'
+});
 
 window.onload = function() {
   let Payee = function(addr = '', amt = '') {
@@ -34,6 +39,7 @@ window.onload = function() {
   };
 
   let vm = function(defaultPayees = []) {
+    let self = this;
     this.memo = ko.observable('https://httpstat.us/200');
     this.payees = ko.observableArray(defaultPayees);
     this.showJson = ko.observable(true);
@@ -45,7 +51,27 @@ window.onload = function() {
       this
     );
     this.pay = () => {
-      console.log('Pay method not yet implemented.');
+      let promises = self.payees().map(payee => {
+        let promise = new Promise((resolve, reject) => {
+          steem.broadcast.transfer(
+            self.wif(),
+            self.payer(),
+            payee.address(),
+            payee.amount(),
+            self.memo(),
+            (err, result) => {
+              if (err) {
+                console.error(err);
+                reject(err);
+              } else {
+                console.log(result);
+                resolve(result);
+              }
+            }
+          );
+        });
+        return promise;
+      });
     };
     this.wif = ko.observable('');
     this.payer = ko.observable('');
