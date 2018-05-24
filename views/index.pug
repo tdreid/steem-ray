@@ -6,7 +6,8 @@ html(lang="en")
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous")
     title= title
   body
-    main.container(style="padding-top: 12px;")
+    h3.w-100.text-center(style="padding-top: 12px;" data-bind="visible: false") Loading...
+    main.container(style="padding-top: 12px; visibility: hidden;" data-bind="style: { visibility: 'visible' }")
       div.row
         div.col-6
           h2 Memo
